@@ -9,7 +9,7 @@ set(CMAKE_C_STANDARD 11)
 
 #Generate the static library from the library sources
 add_library(cstlmp STATIC
-        src/library.c src/library.h)
+        src/linked_list/singly_linked_list.c src/linked_list/singly_linked_list.h)
 
 target_include_directories(cstlmp
         PUBLIC
@@ -22,17 +22,21 @@ target_include_directories(cstlmp
 
 # Add an executable with the above sources
 add_executable(cstlmp_tests
-        tests/simple_test.c
-        )
+        tests/linked_list/test_linked_list.c)
 
 # link the new hello_library target with the hello_binary target
-target_link_libraries( cstlmp_tests
+target_link_libraries(cstlmp_tests
         PRIVATE
         cstlmp
         )
 
+############################################################
+# Enable testing
+############################################################
+
 include(CTest)
 enable_testing()
 
+# add executable to test
 add_test(NAME "cstlmp_tests"
         COMMAND cstlmp_tests)
